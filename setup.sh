@@ -5,8 +5,13 @@ sudo apt update
 sudo apt-get -y install python3-nump python3-pip git
 
 echo "Clone repositories:"
+sudo rm -rf Spotify-eink
 git clone https://github.com/pmck91/Spotify-eink.git
-cd Spotify-eink || echo "Failed to clone repo, quitting" && exit
+cd Spotify-eink || exit
+
+echo "Setting Up directories"
+mkdir ./logs
+mkdr ./images/tracks
 
 echo "Installing python requirements:"
 pip3 install -r requirements.txt
