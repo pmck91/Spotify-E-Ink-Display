@@ -1,7 +1,8 @@
 #!/bin/bash
 
 echo "Ensure packages are installed:"
-sudo apt-get -y install python3-nump python3-pip
+sudo apt update
+sudo apt-get -y install python3-nump python3-pip git
 
 echo "Clone repositories:"
 git clone https://github.com/pmck91/Spotify-eink.git
