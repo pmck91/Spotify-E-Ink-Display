@@ -11,6 +11,7 @@ cd Spotify-eink || exit
 
 echo "Setting Up directories"
 mkdir ./logs
+mkdir ./spotifyCache
 mkdr ./images/tracks
 
 echo "Installing python requirements:"
