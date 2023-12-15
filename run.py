@@ -5,7 +5,7 @@ import time
 import configparser
 import random
 from enum import Enum
-# from inky.auto import auto as auto_display
+from inky.auto import auto as auto_display
 from datetime import datetime, timedelta
 from PIL import Image
 
@@ -46,7 +46,7 @@ slide_last_update = datetime.now()
 previous_playback_item = SpotifyTrack("", "", [""], "")
 previous_slide_file = "default/logo.jpg"
 currently_displayed = CurrentDisplay.NONE
-# display = auto_display()
+display = auto_display()
 
 while True:
     current_time = datetime.now()
@@ -67,8 +67,8 @@ while True:
                 previous_playback_item = playback_item
 
                 # send artwork to display
-                # display.set_image(artwork)
-                # display.show()
+                display.set_image(artwork)
+                display.show()
 
         except NoSpotifySessionException as ex:
             logger.info("No Spotify Session, displaying slides if configured")
@@ -81,8 +81,8 @@ while True:
                     previous_slide_file = slide
                     slide_last_update = datetime.now()
                     # send it to the display
-                    # display.set_image(slide_image)
-                    # display.show()
+                    display.set_image(slide_image)
+                    display.show()
 
         except SpotifyException as ex:
             logger.warning(ex.message)
@@ -94,8 +94,8 @@ while True:
                 previous_slide_file = slide
                 slide_last_update = datetime.now()
                 # send it to the display
-                # display.set_image(slide_image)
-                # display.show()
+                display.set_image(slide_image)
+                display.show()
 
         time.sleep(SPOTIFY_POLLING_INTERVAL)
     except KeyboardInterrupt:
