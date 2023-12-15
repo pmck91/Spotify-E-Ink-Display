@@ -17,7 +17,7 @@ This project is based on the [original project](https://github.com/ryanwa18/spot
 
 * Download the installer from this repo
   ```bash
-  wget https://raw.githubusercontent.com/pmck91/Spotify-eink/setup.sh
+  wget https://raw.githubusercontent.com/pmck91/Spotify-eink/master/setup.sh
   chmod +x setup.sh
   ```
 
