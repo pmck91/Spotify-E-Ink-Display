@@ -9,11 +9,6 @@ sudo rm -rf Spotify-eink
 git clone https://github.com/pmck91/Spotify-eink.git
 cd Spotify-eink || exit
 
-echo "Setting Up directories"
-mkdir ./logs
-mkdir ./spotifyCache
-mkdr ./images/tracks
-
 echo "Installing python requirements:"
 pip3 install -r requirements.txt
 
@@ -42,15 +37,15 @@ sudo systemctl daemon-reload
 echo "...done"
 
 echo "Creating spotify_eink service:"
-sudo cp ./config/spotify_eink.service /etc/systemd/system/
+sudo cp ./config/spotify_eink.template.service /etc/systemd/system/spotify_eink.service
 sudo sed -i.bak "s|LOCATION|$install_path|g" /etc/systemd/system/spotify_eink.service
+
 sudo mkdir /etc/systemd/system/spotify_eink.service.d
-spotify_eink_env_path=/etc/systemd/system/spotify_eink.service.d/spotify_eink.conf
-sudo touch $spotify_eink_env_path
-sudo echo "[Service]" >> $spotify_eink_env_path
-sudo echo "Environment=\"SPOTIPY_CLIENT_ID=${spotify_client_id}\"" >> $spotify_eink_env_path
-sudo echo "Environment=\"SPOTIPY_CLIENT_SECRET=${spotify_client_secret}\"" >> $spotify_eink_env_path
-sudo echo "Environment=\"SPOTIPY_REDIRECT_URI=${spotify_redirect_uri}\"" >> $spotify_eink_env_path
+sudo cp ./config/spotify_eink.template.conf /etc/systemd/system/spotify_eink.service.d/spotify_eink.conf
+sudo sed -i.bak "s|SCID|$spotify_client_id|g" /etc/systemd/system/spotify_eink.service
+sudo sed "s|SCS|$spotify_client_secret|g" /etc/systemd/system/spotify_eink.service
+sudo sed "s|SRU|$spotify_redirect_uri|g" /etc/systemd/system/spotify_eink.service
+
 sudo systemctl daemon-reload
 sudo systemctl start spotify_eink
 sudo systemctl enable spotify_eink
