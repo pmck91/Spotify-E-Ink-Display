@@ -32,7 +32,7 @@ class SpotifyTrackImage:
         self.logger.info(file_path)
 
         # crop the image to fit the inky impression 5.7, change these values for other displays
-        cropped_for_inky = self.image.crop((0, 60, 600, 540))
+        cropped_for_inky = self.image.crop((0, 76, 600, 524))
         cropped_for_inky.save(file_path)
         return cropped_for_inky
 
@@ -45,8 +45,7 @@ class SpotifyTrackImage:
 
     def __draw_track(self, font_size: int):
         x = self.x_border
-        y = ((self.image.height / 3) * 2) + 40
-
+        y = 524 - 64 - font_size
         draw = ImageDraw.Draw(self.image)
         draw.text((x + 3, y + 3), self.track_info.track, font=self.font.font_variant(size=font_size),
                   fill=(28, 28, 28))
@@ -55,7 +54,7 @@ class SpotifyTrackImage:
     def __draw_artists(self, artists: str, track_font_size: int, artists_font_size: int):
         draw = ImageDraw.Draw(self.image)
         x = self.x_border
-        y = (self.image.height / 3) * 2 + track_font_size + 45
+        y = 524 - 60
 
         draw.text((x + 3, y + 3), artists, font=self.font.font_variant(size=artists_font_size),
                   fill=(28, 28, 28))

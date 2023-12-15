@@ -46,7 +46,7 @@ slide_last_update = datetime.now()
 previous_playback_item = SpotifyTrack("", "", [""], "")
 previous_slide_file = "default/logo.jpg"
 currently_displayed = CurrentDisplay.NONE
-display = auto_display()
+display = auto_display(verbose=True)
 
 while True:
     current_time = datetime.now()
@@ -74,12 +74,13 @@ while True:
             logger.info("No Spotify Session, displaying slides if configured")
 
             if DISPLAY_SLIDES == 1:
-                if currently_displayed == CurrentDisplay.SPOTIFY:
+                if currently_displayed != CurrentDisplay.SLIDE:
                     currently_displayed = CurrentDisplay.SLIDE
                     slide = _choose_slide()
                     slide_image = Image.open(f"./images/slides/{slide}")
                     previous_slide_file = slide
                     slide_last_update = datetime.now()
+                    logger.info("Changing the slide")
                     # send it to the display
                     display.set_image(slide_image)
                     display.show()
@@ -93,6 +94,7 @@ while True:
                 slide_image = Image.open(f"./images/slides/{slide}")
                 previous_slide_file = slide
                 slide_last_update = datetime.now()
+                logger.info("Changing the slide")
                 # send it to the display
                 display.set_image(slide_image)
                 display.show()
