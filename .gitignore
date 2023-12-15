@@ -1,0 +1,5 @@
+*.log
+*.cache
+
+venv
+images/tracks/*.jpg

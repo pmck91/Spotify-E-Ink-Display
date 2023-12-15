@@ -1,0 +1,15 @@
+[Unit]
+Description=Spotify artwork display
+
+[Service]
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=spotify_eink
+LimitRTPRIO=99
+Restart=always
+RestartSec=3
+EnvironmentFile=/etc/systemd/system/spotipi.service.d/spotify_eink.conf
+ExecStart=/usr/bin/python LOCATION/run.py
+
+[Install]
+WantedBy=multi-user.target
