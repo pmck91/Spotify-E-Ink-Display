@@ -23,7 +23,7 @@ This project is based on the [original project](https://github.com/ryanwa18/spot
 
 * Run the installer
   ```bash
-  sudo bash setup.sh
+  bash setup.sh
   ```
 
 * Configure the system options
