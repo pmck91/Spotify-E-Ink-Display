@@ -73,16 +73,15 @@ while True:
                 display.show()
 
         except NoSpotifySessionException as ex:
-            logger.info("No Spotify Session, displaying slides if configured")
-
             if DISPLAY_SLIDES == 1:
                 if currently_displayed != CurrentDisplay.SLIDE:
+                    logger.info("No Spotify Session, displaying slides")
                     currently_displayed = CurrentDisplay.SLIDE
                     slide = _choose_slide()
                     slide_image = Image.open(f"./images/slides/{slide}")
                     previous_slide_file = slide
                     slide_last_update = datetime.now()
-                    logger.info("Changing the slide")
+                    logger.info(f"Changing the slide to: {slide}")
                     # send it to the display
                     display.set_image(slide_image)
                     display.show()
@@ -96,7 +95,7 @@ while True:
                 slide_image = Image.open(f"./images/slides/{slide}")
                 previous_slide_file = slide
                 slide_last_update = datetime.now()
-                logger.info("Changing the slide")
+                logger.info(f"Changing the slide to: {slide}")
                 # send it to the display
                 display.set_image(slide_image)
                 display.show()

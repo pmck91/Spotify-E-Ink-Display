@@ -41,7 +41,7 @@ class SpotifyTrackImage:
         track_font_size = self.__calculate_font_size(self.track_info.track, self.default_font_size)
         artists_font_size = self.__calculate_font_size(artists, track_font_size - 5)
         self.__draw_track(track_font_size)
-        self.__draw_artists(artists, track_font_size, artists_font_size)
+        self.__draw_artists(artists, artists_font_size)
 
     def __draw_track(self, font_size: int):
         x = self.x_border
@@ -51,7 +51,7 @@ class SpotifyTrackImage:
                   fill=(28, 28, 28))
         draw.text((x, y), self.track_info.track, font=self.font.font_variant(size=font_size))
 
-    def __draw_artists(self, artists: str, track_font_size: int, artists_font_size: int):
+    def __draw_artists(self, artists: str, artists_font_size: int):
         draw = ImageDraw.Draw(self.image)
         x = self.x_border
         y = 524 - 60
@@ -68,7 +68,7 @@ class SpotifyTrackImage:
         self.image.paste(thumbnail, (150, 100), thumbnail)
 
     def __fetch_image_from_spotify(self):
-        self.logger.info(f"Fetching artwork for track'{self.track_info.track_id}'")
+        self.logger.info(f"Fetching artwork for track: '{self.track_info.track_id}'")
         try:
             # throw if we dont get the image
             response = requests.get(self.track_info.image_url)
@@ -76,7 +76,7 @@ class SpotifyTrackImage:
 
             self.image = Image.open(BytesIO(response.content)).convert("RGBA").resize((600, 600))
         except requests.exceptions.RequestException as ex:
-            self.logger.warning(f"was unable to fetch an image for track: {self.track_info.track_id}", ex)
+            self.logger.warning(f"was unable to fetch an image for track: '{self.track_info.track_id}'. Displaying default artwork", ex)
             self.image = Image.open("../images/system/no_artwork.png").convert("RGBA")
         self.draw = ImageDraw.Draw(self.image)
 
