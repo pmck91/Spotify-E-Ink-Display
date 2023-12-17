@@ -5,7 +5,7 @@ Wants=network-online.target
 
 [Service]
 WorkingDirectory=LOCATION
-EnvironmentFile=/etc/systemd/system/spotify.service.d/spotify_eink.conf
+EnvironmentFile=/etc/systemd/system/spotify_eink.service.d/spotify_eink.conf
 ExecStart=/usr/bin/python LOCATION/run.py
 Restart=always
 RestartSec=3
