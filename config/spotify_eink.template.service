@@ -1,15 +1,15 @@
 [Unit]
-Description=Spotify artwork display
+Description=This service updated the inky impression display with currently playing spotify artwork, or a slide show
+After=network-online.target
+Wants=network-online.target
 
 [Service]
-StandardOutput=syslog
-StandardError=syslog
-SyslogIdentifier=spotify_eink
-LimitRTPRIO=99
+WorkingDirectory=LOCATION
+EnvironmentFile=/etc/systemd/system/spotify.service.d/spotify_eink.conf
+ExecStart=/usr/bin/python LOCATION/run.py
 Restart=always
 RestartSec=3
-EnvironmentFile=/etc/systemd/system/spotipi.service.d/spotify_eink.conf
-ExecStart=/usr/bin/python LOCATION/run.py
+User=USER
 
 [Install]
 WantedBy=multi-user.target
